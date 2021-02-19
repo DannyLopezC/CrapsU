@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>300</y>
+      <x>350</x>
+      <y>330</y>
       <w>170</w>
       <h>90</h>
     </coordinates>
@@ -19,23 +19,23 @@ getVisibleFace():int</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>230</x>
-      <y>50</y>
+      <x>50</x>
+      <y>80</y>
       <w>170</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>ConsoleView
 --
 --
-throw()
+threw()
 showGameState()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>50</y>
+      <x>350</x>
+      <y>80</y>
       <w>170</w>
       <h>170</h>
     </coordinates>
@@ -45,8 +45,8 @@ threw:int
 point:int
 state:int
 --
-setStartingThrew()
-getStartingThrew():int
+setThrew()
+getThrew():int
 getPointValue():int
 setGameState()
 getGameState():int</panel_attributes>
@@ -55,8 +55,8 @@ getGameState():int</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>390</x>
-      <y>60</y>
+      <x>210</x>
+      <y>90</y>
       <w>170</w>
       <h>40</h>
     </coordinates>
@@ -67,8 +67,8 @@ m1=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>590</x>
-      <y>210</y>
+      <x>410</x>
+      <y>240</y>
       <w>40</w>
       <h>110</h>
     </coordinates>
@@ -79,8 +79,8 @@ m1=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>250</x>
-      <y>240</y>
+      <x>70</x>
+      <y>270</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
@@ -93,8 +93,8 @@ main()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>170</y>
+      <x>110</x>
+      <y>200</y>
       <w>30</w>
       <h>90</h>
     </coordinates>

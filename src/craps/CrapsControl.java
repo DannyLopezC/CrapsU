@@ -54,6 +54,11 @@ public class CrapsControl {
 			firstThrow = true;
 		}
 	}
+	
+	public void reset() {
+		point = state = threw = 0;
+		firstThrow = false;
+	}
 
 	public int getPoint() {
 		return point;
@@ -63,11 +68,15 @@ public class CrapsControl {
 		return state;
 	}
 
-	public int[] getDiceFaces() {
-		return diceFaces;
+	public int getDiceFaces(int dice) {
+		return diceFaces[dice];
 	}
 	
 	public int getThrew() {
 		return threw;
+	}
+	
+	public boolean getFirstThrew() {
+		return firstThrow;
 	}
 }

@@ -4,7 +4,8 @@ public class PrincipalCraps {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("helloworld");
+		ConsoleView console = new ConsoleView();
+		console.startGame();
 	}
 
 }
