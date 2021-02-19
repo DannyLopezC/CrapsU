@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>530</x>
-      <y>230</y>
+      <y>300</y>
       <w>170</w>
       <h>90</h>
     </coordinates>
@@ -37,16 +37,19 @@ showGameState()</panel_attributes>
       <x>530</x>
       <y>50</y>
       <w>170</w>
-      <h>130</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>CrapsControl
 --
+threw:int
+point:int
+state:int
 --
-setStartingThrow()
-getStartingThrow():int
+setStartingThrew()
+getStartingThrew():int
 getPointValue():int
 setGameState()
-getGameState()</panel_attributes>
+getGameState():int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -65,13 +68,13 @@ m1=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>590</x>
-      <y>170</y>
+      <y>210</y>
       <w>40</w>
-      <h>80</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=2</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
