@@ -1,63 +1,65 @@
 package craps;
 
-
 public class CrapsControl {
-	
+
 	private Dice dice;
 	private int threw, point, state;
-	private boolean firstThrow;
+	private boolean isFirstThrow, wasFirstThrow;
 	private int[] diceFaces;
-	
+
 	public CrapsControl() {
 		dice = new Dice();
 		diceFaces = new int[2];
-		firstThrow = true;
+		isFirstThrow = true;
 	}
-	
+
 	public void setThrew() {
 		for (int i = 0; i < diceFaces.length; i++) {
 			diceFaces[i] = dice.getVisibleFace();
 			threw += diceFaces[i];
 		}
-		
-		if(firstThrow) {
+
+		if (isFirstThrow) {
 			point = threw;
 		}
-		
 
 	}
-	
+
 	public void setGameState() {
-		if(firstThrow) {
-			
-			if(threw == 7 || threw == 11) {
-				state = 1; //wining
+		if (isFirstThrow) {
+
+			if (threw == 7 || threw == 11) {
+				state = 1; // wining
+			} else if (threw == 2 || threw == 3 || threw == 12) {
+				state = 2; // losing
+			} else {
+				state = 3;
 			}
-			else if(threw == 2 || threw == 3 || threw == 12) {
-				state = 2; //losing
-			}
-			
-			firstThrow = false;
-		}
-		else if(state != 1 && state != 2) {
-			
-			if(threw == point) {
-				state = 1; //wining
-			}
-			else if(threw == 7) {
-				state = 2; //losing
-			}
-			else {
+
+			isFirstThrow = false;
+			wasFirstThrow = true;
+		} else if (state != 1 && state != 2) {
+			wasFirstThrow = false;
+
+			if (threw == point) {
+				state = 1; // wining
+			} else if (threw == 7) {
+				state = 2; // losing
+			} else {
+				state = 3;
 				return;
 			}
-			
-			firstThrow = true;
 		}
 	}
-	
+
 	public void reset() {
 		point = state = threw = 0;
-		firstThrow = false;
+		isFirstThrow = true;
+		wasFirstThrow = false;
+	}
+
+	public void nextRound() {
+		threw = 0;
 	}
 
 	public int getPoint() {
@@ -71,12 +73,12 @@ public class CrapsControl {
 	public int getDiceFaces(int dice) {
 		return diceFaces[dice];
 	}
-	
+
 	public int getThrew() {
 		return threw;
 	}
-	
-	public boolean getFirstThrew() {
-		return firstThrow;
+
+	public boolean getWasFirstThrew() {
+		return wasFirstThrow;
 	}
 }
