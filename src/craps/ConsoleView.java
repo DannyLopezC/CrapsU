@@ -1,18 +1,37 @@
+/*
+ * Author: Danny Andres Lopez - 1941453-2711
+ * Case 1: CrapsGame
+ */
 package craps;
 
 import java.util.Scanner;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConsoleView.
+ */
 public class ConsoleView {
 
+	/** The craps control. */
 	private CrapsControl crapsControl;
+
+	/** The input. */
 	private Scanner input;
+
+	/** The is leaving. */
 	private boolean isLeaving;
 
+	/**
+	 * Instantiates a new console view.
+	 */
 	public ConsoleView() {
 		crapsControl = new CrapsControl();
 		input = new Scanner(System.in);
 	}
 
+	/**
+	 * Start game.
+	 */
 	public void startGame() {
 		System.out.println("Do you want to throw the dices? y/n");
 		if (input.nextLine().equals("y")) {
@@ -53,6 +72,9 @@ public class ConsoleView {
 		}
 	}
 
+	/**
+	 * Play again.
+	 */
 	private void playAgain() {
 		System.out.println("Do you want to play again? y/n");
 		if (input.nextLine().equals("y")) {
