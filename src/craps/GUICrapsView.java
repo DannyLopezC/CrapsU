@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class GUICrapsView extends JFrame {
 
 	private JLabel dice1, dice2;
-	private JButton throwDices;
+	private JButton throwDices, playAgainButton;
 	private ImageIcon images;
 	private Listener listener;
 	private CrapsControl crapsControl;
@@ -24,6 +24,7 @@ public class GUICrapsView extends JFrame {
 
 	private long animationDelay = 100;
 
+	// constructor
 	public GUICrapsView() {
 		// window container and layout
 		Container container = this.getContentPane();
@@ -37,13 +38,16 @@ public class GUICrapsView extends JFrame {
 		dice2 = new JLabel(images);
 
 		throwDices = new JButton("Throw");
+		playAgainButton = new JButton("Play Again");
 
 		throwDices.addActionListener(listener);
+		playAgainButton.addActionListener(listener);
 		crapsControl = new CrapsControl();
 
 		container.add(dice1);
 		container.add(dice2);
 		container.add(throwDices);
+		container.add(playAgainButton);
 
 		this.setTitle("Craps Game");
 		this.setSize(650, 400);
@@ -71,7 +75,7 @@ public class GUICrapsView extends JFrame {
 
 	private void showDiceFaces() {
 
-		diceAnimation();
+//		diceAnimation();
 
 		crapsControl.setThrew();
 		images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(0) + ".png");
@@ -92,12 +96,12 @@ public class GUICrapsView extends JFrame {
 		case 1:
 			icon = new ImageIcon("src/images/Win.png");
 			JOptionPane.showMessageDialog(throwDices, threw, "Result", JOptionPane.DEFAULT_OPTION, icon);
-			crapsControl.reset();
+			isLeaving = true;
 			break;
 		case 2:
 			icon = new ImageIcon("src/images/lose.png");
 			JOptionPane.showMessageDialog(throwDices, threw, "Result", JOptionPane.DEFAULT_OPTION, icon);
-			crapsControl.reset();
+			isLeaving = true;
 			break;
 		case 3:
 			if (crapsControl.getWasFirstThrew()) {
@@ -113,16 +117,26 @@ public class GUICrapsView extends JFrame {
 	}
 
 	private void playAgain() {
-		isLeaving = true;
+		crapsControl.reset();
+		isLeaving = false;
+
+		images = new ImageIcon("src/images/init.png");
+		dice1 = new JLabel(images);
+		dice2 = new JLabel(images);
 	}
 
 	private class Listener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
+			System.out.println(event.getSource());
 			// TODO Auto-generated method stub
-			if (throwDices == event.getSource()) {
+			if (throwDices == event.getSource() && !isLeaving) {
 				startGame();
+			}
+
+			if (playAgainButton == event.getSource()) {
+				playAgain();
 			}
 		}
 	}
