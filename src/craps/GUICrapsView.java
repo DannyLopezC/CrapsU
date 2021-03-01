@@ -1,3 +1,7 @@
+/*
+ * Author: Danny Andres Lopez - 1941453-2711
+ * Case 2: CrapsGame-GUI
+ */
 package craps;
 
 import java.awt.Container;
@@ -12,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 public class GUICrapsView extends JFrame {
 
@@ -22,8 +27,14 @@ public class GUICrapsView extends JFrame {
 	private CrapsControl crapsControl;
 	private boolean isLeaving;
 
+	private Timer timer;
+	private int counter;
+
 	private long animationDelay = 100;
 
+	/**
+	 * Instantiates a new GUI craps view.
+	 */
 	// constructor
 	public GUICrapsView() {
 		// window container and layout
@@ -63,19 +74,15 @@ public class GUICrapsView extends JFrame {
 			dice1.setIcon(images);
 			images = new ImageIcon("src/images/" + (7 - i) + ".png");
 			dice2.setIcon(images);
-
-			try {
-				Thread.sleep(animationDelay);
-			} catch (InterruptedException e) {
-				System.out.println("got interrupted!");
-			}
 		}
 
 	}
 
 	private void showDiceFaces() {
 
-//		diceAnimation();
+		counter = 0;
+		timer = new Timer(1000, actions);
+		timer.start();
 
 		crapsControl.setThrew();
 		images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(0) + ".png");
@@ -125,11 +132,25 @@ public class GUICrapsView extends JFrame {
 		dice2 = new JLabel(images);
 	}
 
+	private ActionListener actions = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			System.out.println("hola");
+			if (counter == 10) {
+				return;
+			}
+
+			diceAnimation();
+			counter++;
+		}
+	};
+
 	private class Listener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println(event.getSource());
 			// TODO Auto-generated method stub
 			if (throwDices == event.getSource() && !isLeaving) {
 				startGame();
