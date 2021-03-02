@@ -8,6 +8,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,6 +36,8 @@ public class GUIGridBagLayoutView extends JFrame {
 	private CrapsControl crapsControl;
 	private Listener listener;
 	private boolean isLeaving;
+	private int x, y;
+	private JFrame window;
 
 	public GUIGridBagLayoutView() {
 		initGUI();
@@ -44,6 +49,7 @@ public class GUIGridBagLayoutView extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window = this;
 	}
 
 	public void initGUI() {
@@ -54,6 +60,9 @@ public class GUIGridBagLayoutView extends JFrame {
 		crapsControl = new CrapsControl();
 
 		title = new Titles("Craps Game", 30, new Color(165, 165, 165));
+		title.addMouseListener(listener);
+		title.addMouseMotionListener(listener);
+		title.setCursor(new Cursor(Cursor.MOVE_CURSOR));
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		constraints.gridwidth = 2;
@@ -180,14 +189,14 @@ public class GUIGridBagLayoutView extends JFrame {
 		throwValue.setText("");
 		messages.setText("Throw the dices to start the game. \n");
 
-		images = new ImageIcon("src/images/init.png");
-		dice1 = new JLabel(images);
-		dice1.setIcon(images);
-		dice2 = new JLabel(images);
-		dice2.setIcon(images);
+//		images = new ImageIcon("src/images/init.png");
+//		dice1 = new JLabel(images);
+//		dice1.setIcon(images);
+//		dice2 = new JLabel(images);
+//		dice2.setIcon(images);
 	}
 
-	private class Listener implements ActionListener {
+	private class Listener implements ActionListener, MouseListener, MouseMotionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -203,6 +212,52 @@ public class GUIGridBagLayoutView extends JFrame {
 			if (exit == event.getSource()) {
 				System.exit(0);
 			}
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent event) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent event) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent event) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent event) {
+			// TODO Auto-generated method stub
+			x = event.getX();
+			y = event.getY();
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent event) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			// TODO Auto-generated method stub
+			int localX = window.getLocation().x + e.getX() - x;
+			int localY = window.getLocation().y + e.getY() - y;
+			setLocation(localX, localY);
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			// TODO Auto-generated method stub
+
 		}
 	}
 }

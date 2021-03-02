@@ -70,41 +70,42 @@ public class GUICrapsView extends JFrame {
 		this.setVisible(true);
 	}
 
-	private void diceAnimation(int i) {
-
-		task = new TimerTask() {
-
-			int counter = 0;
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if (counter <= 10) {
-					images = new ImageIcon("src/images/" + (1 + i) + ".png");
-					dice1.setIcon(images);
-					images = new ImageIcon("src/images/" + (7 - i) + ".png");
-					dice2.setIcon(images);
-				} else {
-					crapsControl.setThrew();
-					images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(0) + ".png");
-					dice1.setIcon(images);
-					images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(1) + ".png");
-					dice2.setIcon(images);
-
-					return;
-				}
-
-				counter++;
-			}
-		};
-
-		timer.schedule(task, animationDelay);
-	}
+//	private void diceAnimation() {
+//		for (int i = 0; i < 6; i++) {
+//
+//			task = new TimerTask() {
+//
+//				int counter = 0;
+//
+//				@Override
+//				public void run() {
+//					// TODO Auto-generated method stub
+//					if (counter <= 10) {
+//						images = new ImageIcon("src/images/" + (1 + i) + ".png");
+//						dice1.setIcon(images);
+//						images = new ImageIcon("src/images/" + (7 - i) + ".png");
+//						dice2.setIcon(images);
+//					} else {
+//						crapsControl.setThrew();
+//						images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(0) + ".png");
+//						dice1.setIcon(images);
+//						images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(1) + ".png");
+//						dice2.setIcon(images);
+//
+//						return;
+//					}
+//
+//					counter++;
+//				}
+//			};
+//
+//			timer.schedule(task, animationDelay);
+//		}
+//
+//	}
 
 	private void showDiceFaces() {
-		for (int i = 0; i < 6; i++) {
-			diceAnimation(i);
-		}
+//		diceAnimation();
 
 	}
 
