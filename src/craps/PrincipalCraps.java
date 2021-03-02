@@ -21,7 +21,9 @@ public class PrincipalCraps {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				GUICrapsView myWindow = new GUICrapsView();
+//				GUICrapsView myWindow = new GUICrapsView();
+
+				GUIGridBagLayoutView myView = new GUIGridBagLayoutView();
 			}
 		});
 	}

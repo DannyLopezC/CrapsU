@@ -9,6 +9,8 @@ import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -16,7 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
+//import javax.swing.Timer;
 
 public class GUICrapsView extends JFrame {
 
@@ -27,10 +29,10 @@ public class GUICrapsView extends JFrame {
 	private CrapsControl crapsControl;
 	private boolean isLeaving;
 
-	private Timer timer;
-	private int counter;
+	private Timer timer = new Timer();
+	private TimerTask task;
 
-	private long animationDelay = 100;
+	private long animationDelay = 1000;
 
 	/**
 	 * Instantiates a new GUI craps view.
@@ -68,31 +70,52 @@ public class GUICrapsView extends JFrame {
 		this.setVisible(true);
 	}
 
-	private void diceAnimation() {
+	private void diceAnimation(int i) {
+
+		task = new TimerTask() {
+
+			int counter = 0;
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (counter <= 10) {
+					images = new ImageIcon("src/images/" + (1 + i) + ".png");
+					dice1.setIcon(images);
+					images = new ImageIcon("src/images/" + (7 - i) + ".png");
+					dice2.setIcon(images);
+				} else {
+					crapsControl.setThrew();
+					images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(0) + ".png");
+					dice1.setIcon(images);
+					images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(1) + ".png");
+					dice2.setIcon(images);
+
+					return;
+				}
+
+				counter++;
+			}
+		};
+
+		timer.schedule(task, animationDelay);
+	}
+
+	private void showDiceFaces() {
 		for (int i = 0; i < 6; i++) {
-			images = new ImageIcon("src/images/" + (1 + i) + ".png");
-			dice1.setIcon(images);
-			images = new ImageIcon("src/images/" + (7 - i) + ".png");
-			dice2.setIcon(images);
+			diceAnimation(i);
 		}
 
 	}
 
-	private void showDiceFaces() {
-
-		counter = 0;
-		timer = new Timer(1000, actions);
-		timer.start();
+	private void startGame() {
+//		showDiceFaces();
 
 		crapsControl.setThrew();
 		images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(0) + ".png");
 		dice1.setIcon(images);
 		images = new ImageIcon("src/images/" + crapsControl.getDiceFaces(1) + ".png");
 		dice2.setIcon(images);
-	}
-
-	private void startGame() {
-		showDiceFaces();
 
 		crapsControl.setGameState();
 		String threw = "Throw was " + crapsControl.getThrew() + "\n";
@@ -131,21 +154,6 @@ public class GUICrapsView extends JFrame {
 		dice1 = new JLabel(images);
 		dice2 = new JLabel(images);
 	}
-
-	private ActionListener actions = new ActionListener() {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			System.out.println("hola");
-			if (counter == 10) {
-				return;
-			}
-
-			diceAnimation();
-			counter++;
-		}
-	};
 
 	private class Listener implements ActionListener {
 
